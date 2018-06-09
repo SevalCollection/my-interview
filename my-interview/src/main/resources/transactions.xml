@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions>
+	<transaction>
+		<item>Coffee</item>
+		<amount>1.99</amount>
+	</transaction>
+	<transaction>
+		<item>Tea</item>
+		<amount>1.59</amount>
+	</transaction>
+	<transaction>
+		<item>Water</item>
+		<amount>1.02</amount>
+	</transaction>
+	<transaction>
+		<item>Milk</item>
+		<amount>0.90</amount>
+	</transaction>
+	<transaction>
+		<item>Expresso</item>
+		<amount>01.01</amount>
+	</transaction>
+</transactions>
