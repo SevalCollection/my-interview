@@ -102,10 +102,13 @@ public class TransactionProcessingUtil {
 		//Creating the TotalAmount of Dollars and Pennies to send for breaking down and formating
 		int[] dollarAndCentTotalAmount = {totalDollars,totalPennies};
 		
-		for(int i = 0; i < DENOM_VALUES[0].length; i++) {
-			for(int j = 0; j < DENOM_VALUES[1].length; j++) {
-				for(int k=0; k < DENOM_SYMBOLS.length; k++) {
-					//dollarAndCentTotalAmount array length will be same as the symbols array. Using same iteration
+		
+		for (int i = 0; i < DENOM_VALUES[0].length; i++) {
+			for (int k = 0; k < DENOM_SYMBOLS.length; k++) {
+				for (int j = 0; j < DENOM_VALUES[1].length; j++) {
+
+					// dollarAndCentTotalAmount array length will be same as the symbols array.
+					// Using same iteration
 					breakDown.append(denominateItem(dollarAndCentTotalAmount[k], DENOM_VALUES[i][j], DENOM_SYMBOLS[k]));
 				}
 			}
@@ -125,12 +128,20 @@ public class TransactionProcessingUtil {
 	 */
 	private static String denominateItem(int amount, int denomValue, char demonSymbol) {
 		StringBuilder formattedStr = new StringBuilder(StringUtils.EMPTY);
+		
+		if (logger.isDebugEnabled()) {
+			logger.debug(" amount: " + amount + " denom Value="+ denomValue +" denomSymbol="+ demonSymbol);
+		}
+		
 		int nos = amount / denomValue;
 		// reducing the amount by that denomination as it has already been picked
 		amount = amount % denomValue;
 		// add to output if value not zero
 		for (int i = 0; nos > 0 && i < nos; i++) {
 			formattedStr.append(demonSymbol+denomValue);
+		}
+		if (logger.isDebugEnabled()) {
+			logger.debug(" appending="+ formattedStr.toString());
 		}
 		return formattedStr.toString();
 	}

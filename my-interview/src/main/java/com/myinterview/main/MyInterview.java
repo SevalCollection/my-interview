@@ -12,8 +12,8 @@ import com.myinterview.utils.XMLUtil;
  * XML Reader and Denomination formatter logic as per Screening Requirement !
  *
  */
-public class DenominationDispenser {
-	static Logger logger = Logger.getLogger(DenominationDispenser.class);
+public class MyInterview {
+	static Logger logger = Logger.getLogger(MyInterview.class);
 
 	// path to the XML to be read - available in the resources folder
 	static String xmlFileName = "/transactions.xml";
