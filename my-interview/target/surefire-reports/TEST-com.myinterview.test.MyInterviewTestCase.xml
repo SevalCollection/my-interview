@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.myinterview.test.MyInterviewTestCase" time="0.148" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.myinterview.test.MyInterviewTestCase" time="0.189" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="gopherProxySet" value="false"/>
     <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
@@ -7,7 +7,7 @@
     <property name="java.specification.version" value="1.8"/>
     <property name="sun.cpu.isalist" value=""/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/Users/rajviji/my-interview/target/test-classes:/Users/rajviji/my-interview/target/classes:/Users/rajviji/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/rajviji/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/rajviji/.m2/repository/org/apache/commons/commons-lang3/3.0/commons-lang3-3.0.jar:/Users/rajviji/.m2/repository/org/apache/commons/commons-collections4/4.0/commons-collections4-4.0.jar:/Users/rajviji/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar:"/>
+    <property name="java.class.path" value="/Users/rajviji/projects/tools/local-repo/my-interview/my-interview/target/test-classes:/Users/rajviji/projects/tools/local-repo/my-interview/my-interview/target/classes:/Users/rajviji/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/rajviji/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/rajviji/.m2/repository/org/apache/commons/commons-lang3/3.0/commons-lang3-3.0.jar:/Users/rajviji/.m2/repository/org/apache/commons/commons-collections4/4.0/commons-collections4-4.0.jar:/Users/rajviji/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar:"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
@@ -17,21 +17,21 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home/jre/lib"/>
-    <property name="sun.java.command" value="/Users/rajviji/my-interview/target/surefire/surefirebooter7827148559857803005.jar /Users/rajviji/my-interview/target/surefire 2018-06-09T10-25-21_369-jvmRun1 surefire3554796180884676312tmp surefire_0739947121241430257tmp"/>
+    <property name="sun.java.command" value="/Users/rajviji/projects/tools/local-repo/my-interview/my-interview/target/surefire/surefirebooter4541172731752017595.jar /Users/rajviji/projects/tools/local-repo/my-interview/my-interview/target/surefire 2018-06-09T11-32-29_535-jvmRun1 surefire297493359732158532tmp surefire_06506360523688684498tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
-    <property name="surefire.test.class.path" value="/Users/rajviji/my-interview/target/test-classes:/Users/rajviji/my-interview/target/classes:/Users/rajviji/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/rajviji/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/rajviji/.m2/repository/org/apache/commons/commons-lang3/3.0/commons-lang3-3.0.jar:/Users/rajviji/.m2/repository/org/apache/commons/commons-collections4/4.0/commons-collections4-4.0.jar:/Users/rajviji/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar:"/>
+    <property name="surefire.test.class.path" value="/Users/rajviji/projects/tools/local-repo/my-interview/my-interview/target/test-classes:/Users/rajviji/projects/tools/local-repo/my-interview/my-interview/target/classes:/Users/rajviji/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/rajviji/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/rajviji/.m2/repository/org/apache/commons/commons-lang3/3.0/commons-lang3-3.0.jar:/Users/rajviji/.m2/repository/org/apache/commons/commons-collections4/4.0/commons-collections4-4.0.jar:/Users/rajviji/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/Users/rajviji"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home/jre"/>
-    <property name="basedir" value="/Users/rajviji/my-interview"/>
+    <property name="basedir" value="/Users/rajviji/projects/tools/local-repo/my-interview/my-interview"/>
     <property name="file.separator" value="/"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="/Users/rajviji/my-interview/target/surefire/surefirebooter7827148559857803005.jar"/>
+    <property name="surefire.real.class.path" value="/Users/rajviji/projects/tools/local-repo/my-interview/my-interview/target/surefire/surefirebooter4541172731752017595.jar"/>
     <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home/jre/classes"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
@@ -47,7 +47,7 @@
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="java.io.tmpdir" value="/var/folders/td/ndjy47v10bgbbds41z0xjdm00000gn/T/"/>
     <property name="java.version" value="1.8.0_65"/>
-    <property name="user.dir" value="/Users/rajviji/my-interview"/>
+    <property name="user.dir" value="/Users/rajviji/projects/tools/local-repo/my-interview/my-interview"/>
     <property name="os.arch" value="x86_64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
@@ -61,5 +61,5 @@
     <property name="java.class.version" value="52.0"/>
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
   </properties>
-  <testcase name="test" classname="com.myinterview.test.MyInterviewTestCase" time="0.148"/>
+  <testcase name="test" classname="com.myinterview.test.MyInterviewTestCase" time="0.189"/>
 </testsuite>

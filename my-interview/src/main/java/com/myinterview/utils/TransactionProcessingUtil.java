@@ -29,6 +29,13 @@ public class TransactionProcessingUtil {
 
 	static Logger logger = Logger.getLogger(TransactionProcessingUtil.class);
 
+
+	//Creating the Current Denominators to pass for calculation 
+	static int[][] DENOM_VALUES = {{20,10,5,2,1},{25,10,5,2,1}};	
+	
+	//The different Symbols for a currency (the whole (Dollars) and the reminder part(Cents)
+	static char[] 	DENOM_SYMBOLS = {'$','C'};
+	
 	/**
 	 * Process the Transactions and perform the transformation xml and write to
 	 * OutputFile
@@ -68,7 +75,7 @@ public class TransactionProcessingUtil {
 	 */
 
 	private static String transformTransaction(Transaction transaction) {
-		return transaction.getItem() + " " + denominate(transaction.getAmount());
+		return transaction.getItem() + " " + denominateTransaction(transaction.getAmount());
 	}
 
 	/**
@@ -79,151 +86,53 @@ public class TransactionProcessingUtil {
 	 * @return the structured breakdown as String
 	 */
 
-	private static String performDenominate(float amount) {
-		return null;
-	}
-	
-	private static String denominitazion(float amount) {
-		return null;
-	}
-	
-	/**
-	 * perform the breakdown routine
-	 * 
-	 * @param amount
-	 *            to breakdown
-	 * @return the structured breakdown as String
-	 */
-
-	private static String denominate(float amount) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug(" breaking down Amount : " + amount);
-		}
-
+	private static String denominateTransaction(float amount) {
 		StringBuilder breakDown = new StringBuilder(StringUtils.EMPTY);
+		
 		// extract the dollar amount
 		int totalDollars = (int) (amount / 1);
 
+		// To retrieve the pennies, use BigDecimal and RoundOf Mode 
 		BigDecimal bdOrigAmount = new BigDecimal((amount - Math.floor(amount)) * 100);
 		bdOrigAmount = bdOrigAmount.setScale(4, RoundingMode.HALF_DOWN);
+		
 		// extract the pennies amount
 		int totalPennies = bdOrigAmount.intValue();
-
-		// break down the DOLLAR part
-
-		// the max denomination Dollar Amount is $20
-		int noOf20s = totalDollars / 20;
-		// reducing the dollar amount by that denomination as it has already been picked
-		totalDollars = totalDollars % 20;
-		// add to output if value not zero
-		if (noOf20s > 0) {
-			for (int i = 0; i < noOf20s; i++) {
-				breakDown.append("$20");
+		
+		//Creating the TotalAmount of Dollars and Pennies to send for breaking down and formating
+		int[] dollarAndCentTotalAmount = {totalDollars,totalPennies};
+		
+		for(int i = 0; i < DENOM_VALUES[0].length; i++) {
+			for(int j = 0; j < DENOM_VALUES[1].length; j++) {
+				for(int k=0; k < DENOM_SYMBOLS.length; k++) {
+					//dollarAndCentTotalAmount array length will be same as the symbols array. Using same iteration
+					breakDown.append(denominateItem(dollarAndCentTotalAmount[k], DENOM_VALUES[i][j], DENOM_SYMBOLS[k]));
+				}
 			}
 		}
+				
+		return null;
+	}
+	
 
-		// the next denomination Dollar Amount is $10
-		int noOf10s = totalDollars / 10;
-		// reducing the dollar amount by that denomination as it has already been picked
-		totalDollars = totalDollars % 10;
+	/**
+	 * Performing the formatting process for individual Item
+	 * 
+	 * @param amount the amount to process the breakdown
+	 * @param denomValue the actual currency denomination to calculate
+	 * @param demonSymbol the symbol that is to be recorded
+	 * @return the formatted string for the individual denominator
+	 */
+	private static String denominateItem(int amount, int denomValue, char demonSymbol) {
+		StringBuilder formattedStr = new StringBuilder(StringUtils.EMPTY);
+		int nos = amount / denomValue;
+		// reducing the amount by that denomination as it has already been picked
+		amount = amount % denomValue;
 		// add to output if value not zero
-		if (noOf10s > 0) {
-			for (int i = 0; i < noOf10s; i++) {
-				breakDown.append("$10");
-			}
+		for (int i = 0; nos > 0 && i < nos; i++) {
+			formattedStr.append(demonSymbol+denomValue);
 		}
-
-		// the max denomination Dollar Amount is $5
-		int noOf5s = totalDollars / 5;
-		// reducing the dollar amount by that denomination as it has already been picked
-		totalDollars = totalDollars % 5;
-		// add to output if value not zero
-		if (noOf5s > 0) {
-			for (int i = 0; i < noOf5s; i++) {
-				breakDown.append("$5");
-			}
-		}
-
-		// the max denomination Dollar Amount is $2
-		int noOf2s = totalDollars / 2;
-		// reducing the dollar amount by that denomination as it has already been picked
-		totalDollars = totalDollars % 2;
-		// add to output if value not zero
-		if (noOf2s > 0) {
-			for (int i = 0; i < noOf2s; i++) {
-				breakDown.append("$2");
-			}
-		}
-
-		// the max denomination Dollar Amount is $1
-		int noOf1s = totalDollars;
-		// add to output if value not zero
-		if (noOf1s > 0) {
-			for (int i = 0; i < noOf1s; i++) {
-				breakDown.append("$1");
-			}
-		}
-
-		// break down the PENNY part
-		// the max denomination Dollar Amount is C25
-		int noOf25cs = totalPennies / 25;
-		// reducing the dollar amount by that denomination as it has already been picked
-		totalPennies = totalPennies % 25;
-		// add to output if value not zero
-		if (noOf25cs > 0) {
-			for (int i = 0; i < noOf25cs; i++) {
-				breakDown.append("C25");
-			}
-		}
-
-		// the max denomination Dollar Amount is C10
-		int noOf10cs = totalPennies / 10;
-		// reducing the dollar amount by that denomination as it has already been picked
-		totalPennies = totalPennies % 10;
-		// add to output if value not zero
-		if (noOf10cs > 0) {
-			for (int i = 0; i < noOf10cs; i++) {
-				breakDown.append("C10");
-			}
-		}
-
-		// the max denomination Dollar Amount is C5
-		int noOf5cs = totalPennies / 5;
-		// reducing the dollar amount by that denomination as it has already been picked
-		totalPennies = totalPennies % 5;
-		// add to output if value not zero
-		if (noOf5cs > 0) {
-			for (int i = 0; i < noOf5cs; i++) {
-				breakDown.append("C5");
-			}
-		}
-
-		// the max denomination Dollar Amount is C2
-		int noOf2cs = totalPennies / 2;
-		// reducing the dollar amount by that denomination as it has already been picked
-		totalPennies = totalPennies % 2;
-		// add to output if value not zero
-		if (noOf2cs > 0) {
-			for (int i = 0; i < noOf2cs; i++) {
-				breakDown.append("C2");
-			}
-		}
-
-		// the max denomination Dollar Amount is $1
-		int noOf1cs = totalPennies;
-		// add to output if value not zero
-		if (noOf1cs > 0) {
-			for (int i = 0; i < noOf1cs; i++) {
-				breakDown.append("C1");
-			}
-		}
-
-		if (logger.isDebugEnabled()) {
-			logger.debug(" broke Amount into : " + breakDown.toString());
-		}
-
-		return breakDown.toString();
+		return formattedStr.toString();
 	}
 
 }
