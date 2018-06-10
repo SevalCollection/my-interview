@@ -29,13 +29,13 @@ public class TransactionProcessingUtil {
 
 	static Logger logger = Logger.getLogger(TransactionProcessingUtil.class);
 
+	// Creating the Current Denominators to pass for calculation
+	static int[][] DENOM_VALUES = { { 20, 10, 5, 2, 1 }, { 25, 10, 5, 2, 1 } };
 
-	//Creating the Current Denominators to pass for calculation 
-	static int[][] DENOM_VALUES = {{20,10,5,2,1},{25,10,5,2,1}};	
-	
-	//The different Symbols for a currency (the whole (Dollars) and the reminder part(Cents)
-	static char[] 	DENOM_SYMBOLS = {'$','C'};
-	
+	// The different Symbols for a currency (the whole (Dollars) and the reminder
+	// part(Cents)
+	static char[] DENOM_SYMBOLS = { '$', 'C' };
+
 	/**
 	 * Process the Transactions and perform the transformation xml and write to
 	 * OutputFile
@@ -57,7 +57,8 @@ public class TransactionProcessingUtil {
 					.map(transaction -> transformTransaction(transaction)).collect(Collectors.toList());
 			MyFileUtil.writeToFile(writeToTxtFileInPath, lines);
 		} else {
-			// create an exception as either WriteFilePath is null or retrieved transactions object was null
+			// create an exception as either WriteFilePath is null or retrieved transactions
+			// object was null
 			throw MyExceptionUtil
 					.createMyInterviewException("Unable to perform Break Down proass with the parameter writeFilePath="
 							+ writeToTxtFileInPath + " and Xtracted Transactions=" + transactions);
@@ -88,60 +89,58 @@ public class TransactionProcessingUtil {
 
 	private static String denominateTransaction(float amount) {
 		StringBuilder breakDown = new StringBuilder(StringUtils.EMPTY);
-		
+
 		// extract the dollar amount
 		int totalDollars = (int) (amount / 1);
 
-		// To retrieve the pennies, use BigDecimal and RoundOf Mode 
+		// To retrieve the pennies, use BigDecimal and RoundOf Mode
 		BigDecimal bdOrigAmount = new BigDecimal((amount - Math.floor(amount)) * 100);
 		bdOrigAmount = bdOrigAmount.setScale(4, RoundingMode.HALF_DOWN);
-		
+
 		// extract the pennies amount
 		int totalPennies = bdOrigAmount.intValue();
-		
-		//Creating the TotalAmount of Dollars and Pennies to send for breaking down and formating
-		int[] dollarAndCentTotalAmount = {totalDollars,totalPennies};
-		
-		
-		for (int i = 0; i < DENOM_VALUES[0].length; i++) {
-			for (int k = 0; k < DENOM_SYMBOLS.length; k++) {
-				for (int j = 0; j < DENOM_VALUES[1].length; j++) {
 
+		// Creating the TotalAmount of Dollars and Pennies to send for breaking down and
+		// formating
+		int[] dollarAndCentTotalAmount = { totalDollars, totalPennies };
+
+		for (int symbIndex = 0; symbIndex < DENOM_SYMBOLS.length; symbIndex++) {
+				Integer amountToReduce = dollarAndCentTotalAmount[symbIndex];
+				char symbol = DENOM_SYMBOLS[symbIndex];
+				for (int valIndex = 0; valIndex < DENOM_VALUES[symbIndex].length; valIndex++) {
 					// dollarAndCentTotalAmount array length will be same as the symbols array.
 					// Using same iteration
-					breakDown.append(denominateItem(dollarAndCentTotalAmount[k], DENOM_VALUES[i][j], DENOM_SYMBOLS[k]));
+					breakDown.append(denominateItem(amountToReduce, DENOM_VALUES[symbIndex][valIndex], symbol));
+					// reducing the amount by that denomination as it has already been picked
+					amountToReduce = amountToReduce % DENOM_VALUES[symbIndex][valIndex];
 				}
-			}
 		}
-				
-		return null;
+		if (logger.isDebugEnabled()) {
+			logger.debug(" appending=" + breakDown.toString());
+		}
+		return breakDown.toString();
 	}
-	
 
 	/**
 	 * Performing the formatting process for individual Item
 	 * 
-	 * @param amount the amount to process the breakdown
-	 * @param denomValue the actual currency denomination to calculate
-	 * @param demonSymbol the symbol that is to be recorded
+	 * @param amount
+	 *            the amount to process the breakdown
+	 * @param denomValue
+	 *            the actual currency denomination to calculate
+	 * @param demonSymbol
+	 *            the symbol that is to be recorded
 	 * @return the formatted string for the individual denominator
 	 */
-	private static String denominateItem(int amount, int denomValue, char demonSymbol) {
+	private static String denominateItem(Integer amount, int denomValue, char demonSymbol) {
 		StringBuilder formattedStr = new StringBuilder(StringUtils.EMPTY);
-		
 		if (logger.isDebugEnabled()) {
-			logger.debug(" amount: " + amount + " denom Value="+ denomValue +" denomSymbol="+ demonSymbol);
+			logger.debug(" amount: " + amount + " denom Value=" + denomValue + " denomSymbol=" + demonSymbol);
 		}
-		
 		int nos = amount / denomValue;
-		// reducing the amount by that denomination as it has already been picked
-		amount = amount % denomValue;
 		// add to output if value not zero
 		for (int i = 0; nos > 0 && i < nos; i++) {
-			formattedStr.append(demonSymbol+denomValue);
-		}
-		if (logger.isDebugEnabled()) {
-			logger.debug(" appending="+ formattedStr.toString());
+			formattedStr.append(String.valueOf(demonSymbol) + denomValue);
 		}
 		return formattedStr.toString();
 	}

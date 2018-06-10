@@ -2,7 +2,7 @@ com/myinterview/utils/TransactionProcessingUtil.class
 com/myinterview/utils/XMLUtil.class
 com/myinterview/exceptions/MyInterviewException.class
 com/myinterview/model/Transaction.class
-com/myinterview/main/MyInterviewDenomDispenser.class
+com/myinterview/main/MyInterview.class
 com/myinterview/exceptions/MyExceptionUtil.class
 com/myinterview/utils/MyFileUtil.class
 com/myinterview/model/Transactions.class
