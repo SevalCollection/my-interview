@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class MyInterviewTestCase {
-	final int MAX = 1000;
+	final int MAX = 10;
 	List<Integer> firstList;
 	Set<Integer> firstDuplicateSet;
 
@@ -161,7 +161,7 @@ public class MyInterviewTestCase {
 			for (int firstListIndex = 0; firstListIndex < distinctFirstList.size(); firstListIndex++) {
 				for (int secondListIndex = secondListCntrlIndex; secondListIndex < distinctSecondList
 						.size(); secondListIndex++) {
-					if (firstList.get(firstListIndex).intValue() == secondList.get(secondListIndex).intValue()) {
+					if (distinctFirstList.get(firstListIndex).intValue() == distinctSecondList.get(secondListIndex).intValue()) {
 						// if found in the second list  secondListIndex+1 is the next starting point during next iteration
 						secondListCntrlIndex = secondListIndex + 1;
 						// update the Duplicate List and continue to next firtstList Value.
